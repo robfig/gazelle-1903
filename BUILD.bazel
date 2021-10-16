@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/robfig/gazelle-1093
+gazelle(name = "gazelle")
+
+go_library(
+    name = "gazelle-1093_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/robfig/gazelle-1093",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_fluxcd_pkg_runtime//:go_default_library"],
+)
+
+go_binary(
+    name = "gazelle-1093",
+    embed = [":gazelle-1093_lib"],
+    visibility = ["//visibility:public"],
+)
